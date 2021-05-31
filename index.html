@@ -71,12 +71,13 @@
             <br>
             <div>
                 <button onclick='saveList()'>Save Playlist</button>
-                <input id="saveName" placeholder="Name (with .txt extension)" type="text">
+                <input id="saveName" placeholder="Name (without .txt extension)" type="text">
             </div>
             <br>
             <div>
                 <button onclick='loadList()'>Load Playlist</button>
-                <input id="loadName" placeholder="Name (with .txt extension)" type="text">
+                <input type=file id=file/>
+                <!-- <input id="loadName" placeholder="Name (without .txt extension)" type="text"> -->
             </div>
         </div>
     </div>
