@@ -232,3 +232,28 @@ function playPauseVideo() {
         video.pause();
     }
 }
+
+var listOfElements;
+
+function getAllElementsFromList() {
+    listOfElements = document.getElementsByTagName("option");
+}
+
+function saveList() {
+    getAllElementsFromList();
+    var listofLinks = [];
+    for (let i = 0; i < listOfElements.length; i++) {
+        let curr = removeParentheses(getParamNames(listOfElements[i].getAttribute('onclick')));
+        listofLinks.push(curr);
+        //var blob = new Blob([curr], { type: "text/plain;charset=utf-8" });
+        //saveAs(blob, "static.txt");
+    }
+    var textDoc = document.createElement('a');
+
+    textDoc.href = 'data:attachment/text,' + encodeURI(listofLinks.join('\n'));
+    textDoc.target = '_blank';
+    textDoc.download = 'myFile.txt';
+    textDoc.click();
+    //console.log(listofLinks);
+
+}
