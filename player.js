@@ -259,11 +259,32 @@ function saveList() {
 }
 
 function loadList() {
-    getAllElementsFromList();
-    var listofLinks = [];
-    for (let i = 0; i < listOfElements.length; i++) {
-        let curr = removeParentheses(getParamNames(listOfElements[i].getAttribute('onclick')));
-        listofLinks.push(curr);
+    var rawFile = new XMLHttpRequest();
+    var allText;
+    rawFile.open("GET", "myFile.txt", false);
+    rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4) {
+            if (rawFile.status === 200 || rawFile.status == 0) {
+                allText = rawFile.responseText;
+            }
+        }
     }
-
+    rawFile.send(null);
+    var test = allText.split('\n');
+    var listOfLinks = [];
+    var listOfTitles = [];
+    const select = document.getElementById("select");
+    for (let index = 0; index < test.length; index++) {
+        var element = test[index].split('\t');
+        listOfTitles.push(element[0]);
+        listOfLinks.push(element[1]);
+        var option = document.createElement('option');
+        option.value = element[0];
+        //option.setAttribute('onclick', `runVideo(${element[1]})`);
+        //movieItem.setAttribute('onclick', `runVideo(${url})`);
+        //option.onclick = runVideo(element[1]);
+        console.log(option.value);
+        console.log(option.onclick);
+        select.appendChild(option);
+    }
 }
